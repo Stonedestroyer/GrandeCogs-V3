@@ -83,7 +83,7 @@ class YuGiOh:
         if data["status"] == "fail":
             await ctx.send(data["message"])
             return
-        em = discord.Embed(title="YuGiOhPrices.com", description="Card Prices", color=0x00ff00)
+        em = discord.Embed(title=card, description="Card Prices", color=0x00ff00)
         for i in data["data"]:
             try:
                 price_usd = i['price_data']['data']['prices']['average']
@@ -92,4 +92,5 @@ class YuGiOh:
                 em.add_field(name=i['print_tag'], value=price)
             except:
                 em.add_field(name=f"{i['print_tag']}", value="Unable to find prices for this card.")
+        em.set_footer(text="YuGiOhPrices.com")
         return em
