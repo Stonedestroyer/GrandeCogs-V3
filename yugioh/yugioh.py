@@ -29,6 +29,8 @@ class YuGiOh:
         await ctx.send(embed=em)
     
     async def cardinfo(self, card):
+        cur = CurrencyConverter()
+        locale.setlocale(locale.LC_ALL, "en_GB.UTF-8")
         async with self.session.get(f"https://www.ygohub.com/api/card_info?name={card}") as xd:
             data = await xd.json(content_type=None)
         if data["status"] == "error":
@@ -61,8 +63,6 @@ class YuGiOh:
             pass
         
         try:
-            cur = CurrencyConverter()
-            locale.setlocale(locale.LC_ALL, "en_GB.UTF-8")
             price_usd = data["card"]["price_avg"]
             price_gbp = cur.convert(price_usd, "USD", "GBP")
             price = locale.currency(price_gbp, grouping=True)
