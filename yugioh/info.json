@@ -1,0 +1,10 @@
+{
+    "author" : ["Haruki N. Grande#1248"],
+    "bot_version" : [3,0,0],
+    "description" : "YuGiOh Card Info & Prices",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!",
+    "short" : "YuGiOh Card Info & Prices",
+    "requirements": ["currency_converter"],
+    "tags" : ["haruki", "grande", "yugioh", "ygo", "tcg", "card"]
+}
