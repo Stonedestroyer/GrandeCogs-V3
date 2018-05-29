@@ -14,7 +14,7 @@ class YuGiOh:
     async def yugioh(self, ctx):
         """YuGiOhPrices.com"""
         if ctx.invoked_subcommand is None:
-            await ctx.send("Placeholder.")
+            await ctx.send_help()
     
     @yugioh.command()
     async def card(self, ctx, *, card):
