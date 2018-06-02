@@ -190,6 +190,3 @@ class NSFW:
                     await ctx.send(":warning: Yande.re has no images for requested tags.")
             except Exception as e:
                 await ctx.send(f":x: **Error:** `{e}`")
-
-def setup(bot):
-    bot.add_cog(NSFW(bot))
