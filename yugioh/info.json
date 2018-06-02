@@ -6,5 +6,5 @@
     "install_msg" : "Thank you for adding this cog!",
     "short" : "YuGiOh Card Info & Prices",
     "requirements": ["currencyconverter"],
-    "tags" : ["haruki", "grande", "yugioh", "ygo", "tcg", "card"]
+    "tags" : ["yugioh", "ygo", "tcg", "card"]
 }
