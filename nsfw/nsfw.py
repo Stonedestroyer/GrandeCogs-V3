@@ -157,20 +157,20 @@ class NSFW:
         except Exception as e:
             await ctx.send(f":x: **Error:** `{e}`")
 
-    @nsfw.command()
-    @commands.guild_only()
-    @commands.is_nsfw()
-    async def lolibooru(self, ctx):
-        """Random Image From Lolibooru"""
-        try:
-            query = ("https://lolibooru.moe/post/random/")
-            page = await (await self.session.get(query)).text()
-            soup = BeautifulSoup(page, 'html.parser')
-            image = soup.find(id="image").get("src")
-            image = image.replace(' ', '%20')
-            await ctx.send(image)
-        except Exception as e:
-            await ctx.send(f":x: **Error:** `{e}`")
+    #@nsfw.command()
+    #@commands.guild_only()
+    #@commands.is_nsfw()
+    #async def lolibooru(self, ctx):
+        #"""Random Image From Lolibooru"""
+        #try:
+            #query = ("https://lolibooru.moe/post/random/")
+            #page = await (await self.session.get(query)).text()
+            #soup = BeautifulSoup(page, 'html.parser')
+            #image = soup.find(id="image").get("src")
+            #image = image.replace(' ', '%20')
+            #await ctx.send(image)
+        #except Exception as e:
+            #await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
     @commands.guild_only()
