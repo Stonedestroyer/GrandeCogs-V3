@@ -69,7 +69,7 @@ class NSFW:
             page = await (await self.session.get(query)).text()
             soup = BeautifulSoup(page, 'html.parser')
             image = soup.find(id="image").get("src")
-            await ctx.send('http:' + image)
+            await ctx.send(image)
         except Exception as e:
             await ctx.send(f":x: **Error:** `{e}`")
 
@@ -83,7 +83,7 @@ class NSFW:
             page = await (await self.session.get(query)).text()
             soup = BeautifulSoup(page, 'html.parser')
             image = soup.find(id="image").get("src")
-            await ctx.send('http://danbooru.donmai.us' + image)
+            await ctx.send(image)
         except Exception as e:
             await ctx.send(f":x: **Error:** `{e}`")
 
