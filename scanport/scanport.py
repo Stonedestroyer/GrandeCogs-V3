@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import socket
 
-class Owner:
+class ScanPort:
     def __init__(self, bot):
         self.bot = bot
 
