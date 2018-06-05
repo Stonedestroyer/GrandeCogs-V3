@@ -5,6 +5,6 @@
     "hidden" : false,
     "install_msg" : "Thank you for adding this cog!",
     "short" : "Simple bash shell within Discord",
-    "requirements": [""],
+    "requirements": [],
     "tags" : ["bash", "shell"]
 }
