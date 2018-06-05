@@ -27,7 +27,7 @@ class Reddit:
         except Exception as e:
             await ctx.send(e)
             return
-        if res["error"]:
+        if "error" in res:
             await ctx.send(f"Nothing found: {res['error']}")
             return
         exts = ['.*.jpg$', '.*.png$', '.*.gif$', '.*.jpeg$'] 
