@@ -29,6 +29,7 @@ class Reddit:
             return
         if res["error"]:
             await ctx.send(f"Nothing found: {res['error']}")
+            return
         exts = ['.*.jpg$', '.*.png$', '.*.gif$', '.*.jpeg$'] 
         ext_search = re.compile('|'.join(exts), re.I) 
         result_urls = [x['data']['url'] for x in res['data']['children']] 
