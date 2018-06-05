@@ -13,7 +13,7 @@ class NSFW:
 
     @commands.group()
     async def nsfw(self, ctx):
-        """Nsfw Commands"""
+        """NSFW Commands"""
         if ctx.invoked_subcommand is None:
             await ctx.send_help()
 
