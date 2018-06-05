@@ -5,6 +5,6 @@
     "hidden" : false,
     "install_msg" : "Thank you for adding this cog!\n\nThe cog creator takes no responsibility if your server/machine is blacklisted by any third party servers.",
     "short" : "Scan server ports",
-    "requirements": [""],
+    "requirements": [],
     "tags" : ["scan", "port", "scanport"]
 }
