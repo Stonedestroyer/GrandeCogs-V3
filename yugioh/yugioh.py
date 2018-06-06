@@ -31,8 +31,7 @@ class YuGiOh:
     async def cardinfo(self, card):
         cur = CurrencyConverter()
         locale.setlocale(locale.LC_ALL, "en_GB.UTF-8")
-        async with self.session.get(f"https://www.ygohub.com/api/card_info?name={card}") as xd:
-            data = await xd.json(content_type=None)
+        data = await (await self.session.get(f"https://www.ygohub.com/api/card_info?name={card}")).json(content_type=None)
         if data["status"] == "error":
             em = discord.Embed(title=(data["error_msg"]).title(), color=0xff0000)
             em.set_footer(text="YGOHub.com")
@@ -78,8 +77,7 @@ class YuGiOh:
     async def cardprice(self, card):
         cur = CurrencyConverter()
         locale.setlocale(locale.LC_ALL, "en_GB.UTF-8")
-        async with self.session.get(f"http://yugiohprices.com/api/get_card_prices/{card}") as xd:
-            data = await xd.json()
+        data = await (await self.session.get(f"http://yugiohprices.com/api/get_card_prices/{card}")).json()
         if data["status"] == "fail":
             await ctx.send(data["message"])
             return
