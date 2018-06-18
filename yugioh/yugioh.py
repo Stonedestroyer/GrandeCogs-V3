@@ -10,11 +10,9 @@ class YuGiOh:
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
     
-    @commands.group(aliases=["ygo"])
+    @commands.group(aliases=["ygo"], autohelp=True)
     async def yugioh(self, ctx):
         """YuGiOhPrices.com"""
-        if ctx.invoked_subcommand is None:
-            await ctx.send_help()
     
     @yugioh.command()
     async def card(self, ctx, *, card):
