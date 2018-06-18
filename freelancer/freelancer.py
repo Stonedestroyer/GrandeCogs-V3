@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import aiohttp
 import io
+import asyncio
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 
