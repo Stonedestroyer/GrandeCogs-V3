@@ -73,7 +73,7 @@ class Freelancer:
         if not data:
             return "Server"
         elif len(data) > 1:
-            await ctx.send("There is more than one result for this server name, want to see them all?")
+            await author.channel("There is more than one result for this server name, want to see them all?")
             def check(user, message):
                 return user == author and message.content.lower() in ("yes", "no")
             try:
