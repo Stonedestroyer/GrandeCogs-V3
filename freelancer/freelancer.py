@@ -25,7 +25,7 @@ class Freelancer:
     @freelancer.command()
     async def server(self, ctx, server, timeframe="day"):
         """Server Graph"""
-        image = await self._server_graph(server, timeframe)
+        image = await self._server_graph(ctx.author, server, timeframe)
         try:
             if image.startswith("Timeframe"):
                 return await ctx.send("Invalid timeframe.")
@@ -33,7 +33,11 @@ class Freelancer:
                 return await ctx.send("Invalid server.")
         except:
             pass
-        await ctx.send(file=discord.File(image, f"{server}-{timeframe}-graph.png"))
+        if len(image) == 1:
+            await ctx.send(file=discord.File(img, f"{server}-{timeframe}-graph.png"))
+        else:
+            for img in image:
+                await ctx.send(file=discord.File(img, f"{timeframe}-graph.png"))
     
     async def _top_n_servers(self, n):
         if (n < 3) or (n > 10):
@@ -56,7 +60,7 @@ class Freelancer:
         em.set_footer(text=f"Last Update: {last_update}")
         return em
     
-    async def _server_graph(self, server, timeframe):
+    async def _server_graph(self, author, server, timeframe):
         timeframes = ["day","week","month","year"]
         if timeframe not in timeframes:
             return "Timeframe"
@@ -69,7 +73,28 @@ class Freelancer:
                 data.append(row)
         if not data:
             return "Server"
-        image = "http://flserver.de/" + data[0].find("a")["href"]
-        image = await (await self.session.get(image)).read()
-        image = io.BytesIO(image)
-        return image
+        elif len(data) > 1:
+            await ctx.send("There is more than one result for this server name, want to see them all?")
+            def check(user, message):
+                return user == author and message.content.lower() in ("yes", "no")
+            try:
+                msg = await self.bot.wait_for("message", timeout=30.0, check=check)
+            except asyncio.TimeoutError:
+                await author.channel("Request timed out, posting the first result:")
+                image = "http://flserver.de/" + data[0].find("a")["href"]
+                image = await (await self.session.get(image)).read()
+                image = io.BytesIO(image)
+                return image
+            if msg.content.lower() == "yes":
+                images = []
+                for server in data:
+                    image = "http://flserver.de/" + server.find("a")["href"]
+                    image = await (await self.session.get(image)).read()
+                    image = io.BytesIO(image)
+                    images.append(image)
+                return images
+        else:
+            image = "http://flserver.de/" + data[0].find("a")["href"]
+            image = await (await self.session.get(image)).read()
+            image = io.BytesIO(image)
+            return image
