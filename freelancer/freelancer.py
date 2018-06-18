@@ -31,13 +31,12 @@ class Freelancer:
                 return await ctx.send("Invalid timeframe.")
             if image.startswith("Server"):
                 return await ctx.send("Invalid server.")
+            if len(image) > 1:
+                for img in image:
+                    await ctx.send(file=discord.File(img, f"{timeframe}-graph.png"))
         except:
             pass
-        if len(image) > 1:
-            for img in image:
-                await ctx.send(file=discord.File(img, f"{timeframe}-graph.png"))
-        else:
-            await ctx.send(file=discord.File(img, f"{server}-{timeframe}-graph.png"))
+        await ctx.send(file=discord.File(img, f"{server}-{timeframe}-graph.png"))
     
     async def _top_n_servers(self, n):
         if (n < 3) or (n > 10):
