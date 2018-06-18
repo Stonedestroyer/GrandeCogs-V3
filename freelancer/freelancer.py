@@ -94,6 +94,11 @@ class Freelancer:
                     image = io.BytesIO(image)
                     images.append(image)
                 return images
+            else:
+                image = "http://flserver.de/" + data[0].find("a")["href"]
+                image = await (await self.session.get(image)).read()
+                image = io.BytesIO(image)
+                return image
         else:
             image = "http://flserver.de/" + data[0].find("a")["href"]
             image = await (await self.session.get(image)).read()
