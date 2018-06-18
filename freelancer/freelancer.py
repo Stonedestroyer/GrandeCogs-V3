@@ -36,7 +36,7 @@ class Freelancer:
                     await ctx.send(file=discord.File(img, f"{timeframe}-graph.png"))
         except:
             pass
-        await ctx.send(file=discord.File(img, f"{server}-{timeframe}-graph.png"))
+        await ctx.send(file=discord.File(image, f"{server}-{timeframe}-graph.png"))
     
     async def _top_n_servers(self, n):
         if (n < 3) or (n > 10):
