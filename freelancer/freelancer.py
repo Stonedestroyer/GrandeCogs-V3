@@ -95,6 +95,7 @@ class Freelancer:
                     images.append(image)
                 return images
             else:
+                await ctx.send("Only posting the first result:")
                 image = "http://flserver.de/" + data[0].find("a")["href"]
                 image = await (await self.session.get(image)).read()
                 image = io.BytesIO(image)
