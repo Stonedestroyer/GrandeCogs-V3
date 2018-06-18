@@ -64,8 +64,8 @@ class Freelancer:
         for row in rows:
             if server.lower() in str(row).lower():
                 data.append(row)
-            else:
-                return "Server"
+        if not data:
+            return "Server"
         image = "http://flserver.de/" + data[0].find("a")["href"]
         image = await (await self.session.get(image)).read()
         image = io.BytesIO(image)
