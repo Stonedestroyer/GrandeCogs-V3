@@ -75,7 +75,7 @@ class Freelancer:
         if not data:
             return "Server"
         elif len(data) > 1:
-            await ctx.send("There is more than one result for this server name, want to see them all?")
+            await ctx.send("There is more than one result for this server name, want to see the first 3?")
             def check(message):
                 return message.author == ctx.author and message.content.lower() in ("yes", "no") and message.channel == ctx.channel
             try:
@@ -88,6 +88,7 @@ class Freelancer:
                 return image
             if msg.content.lower() == "yes":
                 images = []
+                data = data[:3]
                 for server in data:
                     image = "http://flserver.de/" + server.find("a")["href"]
                     image = await (await self.session.get(image)).read()
