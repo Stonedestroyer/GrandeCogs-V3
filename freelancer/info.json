@@ -1,0 +1,10 @@
+{
+    "author" : ["Haruki N. Grande#1248"],
+    "bot_version" : [3,0,0],
+    "description" : "Freelancer Server Stats",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!",
+    "short" : "Freelancer Server Stats",
+    "requirements": ["bs4", "io", "tabulate"],
+    "tags" : ["freelancer", "fl"]
+}
