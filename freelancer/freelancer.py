@@ -75,7 +75,7 @@ class Freelancer:
             return "Server"
         elif len(data) > 1:
             await ctx.send("There is more than one result for this server name, want to see them all?")
-            def check(user, message):
+            def check(message, user):
                 return user == ctx.author and message.content.lower() in ("yes", "no") and message.channel == ctx.channel
             try:
                 msg = await self.bot.wait_for("message", timeout=30.0, check=check)
