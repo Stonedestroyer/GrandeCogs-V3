@@ -26,10 +26,13 @@ class Freelancer:
     async def server(self, ctx, server, timeframe="day"):
         """Server Graph"""
         image = await self._server_graph(server, timeframe)
-        if image.startswith("Timeframe"):
-            return await ctx.send("Invalid timeframe.")
-        if image.startswith("Server"):
-            return await ctx.send("Invalid server.")
+        try:
+            if image.startswith("Timeframe"):
+                return await ctx.send("Invalid timeframe.")
+            if image.startswith("Server"):
+                return await ctx.send("Invalid server.")
+        except:
+            pass
         await ctx.send(file=discord.File(image, f"{server}-{timeframe}-graph.png"))
     
     async def _top_n_servers(self, n):
