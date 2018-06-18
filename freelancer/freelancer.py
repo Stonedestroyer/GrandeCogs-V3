@@ -25,7 +25,7 @@ class Freelancer:
     @freelancer.command()
     async def server(self, ctx, server, timeframe="day"):
         """Server Graph"""
-        image = await self._server_graph(ctx.author, server, timeframe)
+        image = await self._server_graph(ctx, server, timeframe)
         try:
             if image.startswith("Timeframe"):
                 return await ctx.send("Invalid timeframe.")
@@ -59,7 +59,7 @@ class Freelancer:
         em.set_footer(text=f"Last Update: {last_update}")
         return em
     
-    async def _server_graph(self, author, server, timeframe):
+    async def _server_graph(self, ctx, server, timeframe):
         timeframes = ["day","week","month","year"]
         if timeframe not in timeframes:
             return "Timeframe"
@@ -73,13 +73,13 @@ class Freelancer:
         if not data:
             return "Server"
         elif len(data) > 1:
-            await author.channel("There is more than one result for this server name, want to see them all?")
+            await ctx.send("There is more than one result for this server name, want to see them all?")
             def check(user, message):
-                return user == author and message.content.lower() in ("yes", "no")
+                return user == ctx.author and message.content.lower() in ("yes", "no") and message.channel == ctx.channel
             try:
                 msg = await self.bot.wait_for("message", timeout=30.0, check=check)
             except asyncio.TimeoutError:
-                await author.channel("Request timed out, posting the first result:")
+                await ctx.send("Request timed out, posting the first result:")
                 image = "http://flserver.de/" + data[0].find("a")["href"]
                 image = await (await self.session.get(image)).read()
                 image = io.BytesIO(image)
