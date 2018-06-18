@@ -23,7 +23,7 @@ class Freelancer:
         await ctx.send(embed=em)
     
     @freelancer.command()
-    async def server(self, ctx, server, timeframe="day")
+    async def server(self, ctx, server, timeframe="day"):
         """Server Graph"""
         image = await self._server_graph(server, timeframe)
         if image.startswith("Timeframe"):
@@ -53,7 +53,7 @@ class Freelancer:
         em.set_footer(text=f"Last Update: {last_update}")
         return em
     
-    async def _server_graph(self, server, timeframe)
+    async def _server_graph(self, server, timeframe):
         timeframes = ["day","week","month","year"]
         if timeframe not in timeframes:
             return "Timeframe"
