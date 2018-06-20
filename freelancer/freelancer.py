@@ -20,8 +20,8 @@ class Freelancer:
     @freelancer.command()
     async def topservers(self, ctx, n=5):
         """Top Servers"""
-        em = await self._top_n_servers(n)
-        await ctx.send(embed=em)
+        msg = await self._top_n_servers(n)
+        await ctx.send(msg)
     
     @freelancer.command()
     async def server(self, ctx, server, timeframe="day"):
@@ -50,16 +50,14 @@ class Freelancer:
         rows = soup.find_all("tr")
         total_servers, total_players = rows[0].get_text("\n").split("\n")
         servers = rows[2:n+2]
-        em = discord.Embed(title="Freelancer", color=0x0000ff)
         result = []
         for server in servers:
             rank, players, name = server.get_text("\n").split("\n")
             result.append([rank,players,name])
         headers = ["Rank","Players","Server"]
         table = tabulate(result, headers, tablefmt="psql", numalign="left")
-        em.add_field(name="Top Servers by Player Count", value=f"```diff\n\n{table}\n```", )
-        em.set_footer(text=f"Last Update: {last_update}")
-        return em
+        msg = f"**Top Servers by Player Count:**\n\n```diff\n\n{table}\n```\n\n*Last Update:* {last_update}"
+        return msg
     
     async def _server_graph(self, ctx, server, timeframe):
         timeframes = ["day","week","month","year"]
