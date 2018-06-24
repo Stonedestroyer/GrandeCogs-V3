@@ -13,7 +13,7 @@ class ORly:
     @commands.command()
     async def orly(self, ctx, box_text, title_text, small_text, image_url, hex):
         """O Rly?"""
-        data_path = cog_data_path()
+        data_path = cog_data_path(cog_instance="ORly")
         orly_logo = os.path.join(data_path, 'CogManager', 'cogs', 'orly', 'data', 'orly-logo.png')
         gara_font = os.path.join(data_path, 'CogManager', 'cogs', 'orly', 'data', 'garamond.otf')
         gara_italic_font = os.path.join(data_path, 'CogManager', 'cogs', 'orly', 'data', 'garamond_italic.otf')
