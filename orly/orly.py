@@ -35,7 +35,7 @@ class ORly:
         draw.line((20, 515, 480, 515), width=175, fill=colour)
         logo = Image.open(orly_logo).resize((100,40), Image.ANTIALIAS)
         im.paste(logo, (30,635), mask=logo)
-        inp_im = Image.open(await self.getimage(image_url)).resize((350,350), Image.ANTIALIAS)
+        inp_im = (Image.open(await self.getimage(image_url)).resize((350,350), Image.ANTIALIAS)).convert("RGBA")
         im.paste(inp_im, (75,70), mask=inp_im)
         draw.text(((W-title_size_w)/2, 15), title_text, font=title_font, fill="black")
         draw.text((480-small_size_w, 605), small_text, font=small_font, fill="black")
