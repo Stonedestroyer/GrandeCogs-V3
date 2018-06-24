@@ -50,7 +50,7 @@ class ORly:
         img.seek(0)
         await ctx.send(file=discord.File(img, "orly.png"))
 
-    await def getimage(self, url):
+    async def getimage(self, url):
         data = await (await self.session.get(url)).read()
         img = BytesIO(data)
         return img
