@@ -17,6 +17,7 @@ class ORly:
         orly_logo = os.path.join(data_path, 'CogManager', 'cogs', 'orly', 'data', 'orly-logo.png')
         gara_font = os.path.join(data_path, 'CogManager', 'cogs', 'orly', 'data', 'garamond.otf')
         gara_italic_font = os.path.join(data_path, 'CogManager', 'cogs', 'orly', 'data', 'garamond_italic.otf')
+        print(orly_logo)
         W, H = (500, 700)
         try:
             hex = hex.replace("#", "")
