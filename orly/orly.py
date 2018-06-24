@@ -39,7 +39,7 @@ class ORly:
         im.paste(inp_im, (75,70), mask=inp_im)
         draw.text(((W-title_size_w)/2, 15), title_text, font=title_font, fill="black")
         draw.text((480-small_size_w, 605), small_text, font=small_font, fill="black")
-        lines = textwrap.wrap(box_text, width=8)[:2]
+        lines = textwrap.wrap(box_text, width=10)[:2]
         line_h, pad = 443, 10
         for line in lines:
             lw, lh = draw.textsize(line, font=box_font)
