@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 class OpenNIC:
     def __init__(self, bot):
         self.bot = bot
+        self.session = aiohttp.ClientSession(loop=self.bot.loop)
     
     @commands.group(aliases=["onic"])
     async def opennic(self, ctx):
@@ -16,7 +17,7 @@ class OpenNIC:
     @opennic.command()
     async def country(self, ctx, country_code):
         """Grab all Tier 2 servers by country"""
-        html = await (await aiohttp.ClientSession(loop=bot.loop).get("https://servers.opennicproject.org/view.php?tier=2")).text()
+        html = await (await self.session.get("https://servers.opennicproject.org/view.php?tier=2")).text()
         soup = BeautifulSoup(html, "html.parser")
         cc_list = soup.find("ul", id="cc").get_text().split()[1:]
         cc_list.insert(0, "ANY")
