@@ -1,0 +1,10 @@
+{
+    "author" : ["Haruki N. Grande#1248"],
+    "bot_version" : [3,0,0],
+    "description" : "OpenNIC Server Searching Tool",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!",
+    "short" : "OpenNIC Server Searching Tool",
+    "requirements": ["bs4"],
+    "tags" : ["opennic", "dns"]
+}
