@@ -9,10 +9,9 @@ class OpenNIC:
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
     
     @commands.group(aliases=["onic"])
+    @commands.guild_only()
     async def opennic(self, ctx):
         """OpenNIC"""
-        if ctx.invoked_subcommand is None:
-            await ctx.send_help()
     
     @opennic.command()
     async def country(self, ctx, cc):
