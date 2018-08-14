@@ -12,6 +12,7 @@ class OpenNIC:
     @commands.guild_only()
     async def opennic(self, ctx):
         """OpenNIC"""
+        pass
     
     @opennic.command()
     async def country(self, ctx, cc):
