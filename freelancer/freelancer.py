@@ -12,10 +12,10 @@ class Freelancer:
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
     
     @commands.group(aliases=["fl"])
+    @commands.guild_only()
     async def freelancer(self, ctx):
         """Freelancer Server Stats"""
-        if ctx.invoked_subcommand is None:
-            await ctx.send_help()
+        pass
     
     @freelancer.command()
     async def topservers(self, ctx, n=5):
