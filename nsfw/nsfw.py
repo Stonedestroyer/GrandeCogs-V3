@@ -12,13 +12,12 @@ class NSFW:
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
 
     @commands.group()
+    @commands.guild_only()
     async def nsfw(self, ctx):
         """NSFW Commands"""
-        if ctx.invoked_subcommand is None:
-            await ctx.send_help()
+        pass
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def yandere(self, ctx):
         """Random Image From Yandere"""
@@ -32,7 +31,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def konachan(self, ctx):
         """Random Image From Konachan"""
@@ -46,7 +44,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def e621(self, ctx):
         """Random Image From e621"""
@@ -60,7 +57,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def rule34(self, ctx):
         """Random Image From rule34"""
@@ -74,7 +70,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def danbooru(self, ctx):
         """Random Image From Danbooru"""
@@ -88,7 +83,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def gelbooru(self, ctx):
         """Random Image From Gelbooru"""
@@ -102,7 +96,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def tbib(self, ctx):
         """Random Image From TBIB"""
@@ -116,7 +109,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def xbooru(self, ctx):
         """Random Image From Xbooru"""
@@ -130,7 +122,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def furrybooru(self, ctx):
         """Random Image From Furrybooru"""
@@ -144,7 +135,6 @@ class NSFW:
             await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def drunkenpumken(self, ctx):
         """Random Image From DrunkenPumken"""
@@ -173,7 +163,6 @@ class NSFW:
             #await ctx.send(f":x: **Error:** `{e}`")
 
     @nsfw.command()
-    @commands.guild_only()
     @commands.is_nsfw()
     async def ysearch(self, ctx, *tags: str):
         """Search Yandere With A Tag"""
