@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from redbot.core import commands
 from PIL import Image, ImageDraw, ImageFont
 import aiohttp, textwrap, os
 from redbot.core.data_manager import cog_data_path
