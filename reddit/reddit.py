@@ -12,13 +12,12 @@ class Reddit:
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
 
     @commands.group(aliases=["r"])
+    @commands.guild_only()
     async def reddit(self, ctx):
         """Reddit Commands"""
-        if ctx.invoked_subcommand is None:
-            await ctx.send_help()
+        pass
 
     @reddit.command()
-    @commands.guild_only()
     async def image(self, ctx, subreddit):
         """Random Image From Subreddit"""
         query = f"https://www.reddit.com/r/{subreddit}.json?limit=100"
