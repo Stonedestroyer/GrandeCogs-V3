@@ -2,7 +2,9 @@ import discord
 from redbot.core import commands
 import socket
 
-class ScanPort:
+BaseCog = getattr(commands, "Cog", object)
+
+class ScanPort(BaseCog):
     def __init__(self, bot):
         self.bot = bot
 
