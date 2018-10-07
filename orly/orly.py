@@ -5,7 +5,9 @@ import aiohttp, textwrap, os
 from redbot.core.data_manager import cog_data_path
 from io import BytesIO
 
-class ORly:
+BaseCog = getattr(commands, "Cog", object)
+
+class ORly(BaseCog):
     def __init__(self, bot):
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
