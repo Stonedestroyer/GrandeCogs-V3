@@ -4,7 +4,9 @@ from bs4 import BeautifulSoup
 import random
 import aiohttp
 
-class NSFW:
+BaseCog = getattr(commands, "Cog", object)
+
+class NSFW(BaseCog):
     """NSFW commands."""
 
     def __init__(self, bot):
