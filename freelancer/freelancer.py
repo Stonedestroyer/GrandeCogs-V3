@@ -6,7 +6,9 @@ import asyncio
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 
-class Freelancer:
+BaseCog = getattr(commands, "Cog", object)
+
+class Freelancer(BaseCog):
     def __init__(self, bot):
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
