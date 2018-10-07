@@ -3,7 +3,9 @@ from redbot.core import commands
 import aiohttp
 from bs4 import BeautifulSoup
 
-class OpenNIC:
+BaseCog = getattr(commands, "Cog", object)
+
+class OpenNIC(BaseCog):
     def __init__(self, bot):
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
