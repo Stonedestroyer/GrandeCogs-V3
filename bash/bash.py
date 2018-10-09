@@ -7,7 +7,9 @@ import threading
 from asyncio.subprocess import PIPE
 from redbot.core.utils.chat_formatting import pagify
 
-class Bash:
+BaseCog = getattr(commands, "Cog", object)
+
+class Bash(BaseCog):
     def __init__(self, bot):
         self.bot = bot
     

@@ -5,7 +5,9 @@ import locale
 import io
 from currency_converter import CurrencyConverter
 
-class YuGiOh:
+BaseCog = getattr(commands, "Cog", object)
+
+class YuGiOh(BaseCog):
     def __init__(self, bot):
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)

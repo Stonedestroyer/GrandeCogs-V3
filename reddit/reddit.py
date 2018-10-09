@@ -4,7 +4,9 @@ import re
 import aiohttp
 import random
 
-class Reddit:
+BaseCog = getattr(commands, "Cog", object)
+
+class Reddit(BaseCog):
     """Reddit commands."""
 
     def __init__(self, bot):
