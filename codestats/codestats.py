@@ -1,9 +1,11 @@
 import discord
-from discord.ext import commands
+from redbot.core import commands
 import aiohttp
 import math
 
-class CodeStats:
+BaseCog = getattr(commands, "Cog", object)
+
+class CodeStats(BaseCog):
     def __init__(self, bot):
         self.bot = bot
         self.session = aiohttp.ClientSession(loop=self.bot.loop)
