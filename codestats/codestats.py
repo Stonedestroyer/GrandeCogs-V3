@@ -26,7 +26,7 @@ class CodeStats(BaseCog):
         langs = ""
         top_langs = dict(sorted(data['languages'].items(), key=lambda lang: lang[1]['xps'], reverse=True)[:5])
         for key, value in top_langs.items():
-            langs += f"**{key}:** Level {self._getlevel(value['xps'])}\n"
+            langs += f"**{key}:** Level {self._getlevel(value['xps'])} ({value['xps']} xp)\n"
         
         embed = discord.Embed(description=f"[{user}](https://codestats.net/users/{user})", colour=discord.Colour.blue())
         embed.add_field(name="Overall", value=f"**Level:** {level}\n**Total XP:** {total_xp}\n**Recent XP:** {recent_xp}")
