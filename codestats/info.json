@@ -1,0 +1,10 @@
+{
+    "author" : ["Grande#0001"],
+    "bot_version" : [3,0,0],
+    "description" : "Get statistics about users on CodeStats.net",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!",
+    "short" : "Get statistics about users on CodeStats.net",
+    "requirements": [],
+    "tags" : ["codestats", "stats", "code"]
+}
