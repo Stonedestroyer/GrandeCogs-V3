@@ -15,7 +15,7 @@ class CodeStats(BaseCog):
         """CodeStats"""
         async with self.session.get(f"https://codestats.net/api/users/{name}") as resp:
             if resp.status is not 200:
-                await ctx.send("User not found.")
+                await ctx.send("User not found or private.")
                 return
             data = await resp.json()
         
