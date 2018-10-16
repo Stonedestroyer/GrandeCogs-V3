@@ -54,9 +54,10 @@ class Googl(BaseCog):
             await ctx.send(data['longUrl'])
         except:
             if "error" in data:
-                await ctx.send("The API key is invalid.")
-            elif "status" not in data:
-                await ctx.send("This URL doesn't exist.")
+                if data["error"]["errors"]["code"] == "404":
+                    await ctx.send("This URL doesn't exist.")
+                else:
+                    await ctx.send("The API key is invalid.")
             else:
                 await ctx.send("This URL has been removed.")
 
@@ -80,8 +81,9 @@ class Googl(BaseCog):
             await ctx.send(embed=embed)
         except:
             if "error" in data:
-                await ctx.send("The API key is invalid.")
-            elif "status" not in data:
-                await ctx.send("This URL doesn't exist.")
+                if data["error"]["errors"]["code"] == "404":
+                    await ctx.send("This URL doesn't exist.")
+                else:
+                    await ctx.send("The API key is invalid.")
             else:
                 await ctx.send("This URL has been removed.")
