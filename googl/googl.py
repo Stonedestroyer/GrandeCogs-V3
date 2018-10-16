@@ -65,10 +65,10 @@ class Googl(BaseCog):
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url + '&projection=FULL') as resp:
             print(resp.status)
             data = await resp.json()
-            await ctx.send(data["status"])
-            if data["status"] is not "OK":
-                await ctx.send("This URL has either been removed or doesn't exist.")
-                return
+        await ctx.send(data["status"])
+        if data["status"] is not "OK":
+            await ctx.send("This URL has either been removed or doesn't exist.")
+            return
         embed = discord.Embed(colour=discord.Colour.blue())
         embed.add_field(name="**Shortened Url:**",value=data['id'])
         embed.add_field(name="**Long Url:**",value=data['longUrl'])
