@@ -50,12 +50,13 @@ class Googl(BaseCog):
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url) as resp:
             #print(resp.status)
             data = await resp.json()
-        if data["status"] == "OK":
+        try:
             await ctx.send(data['longUrl'])
-        elif "status" not in data:
-            await ctx.send("This URL doesn't exist.")
-        else:
-            await ctx.send("This URL has been removed.")
+        except:
+            if "status" not in data:
+                await ctx.send("This URL doesn't exist.")
+            else:
+                await ctx.send("This URL has been removed.")
 
     @googl.command()
     async def analytics(self, ctx, url):
@@ -67,7 +68,7 @@ class Googl(BaseCog):
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url + '&projection=FULL') as resp:
             print(resp.status)
             data = await resp.json()
-        if data["status"] == "OK":
+        try:
             embed = discord.Embed(colour=discord.Colour.blue())
             embed.add_field(name="**Shortened Url:**",value=data['id'])
             embed.add_field(name="**Long Url:**",value=data['longUrl'])
@@ -75,7 +76,8 @@ class Googl(BaseCog):
             embed.add_field(name="**Clicks:**",value=data['analytics']['allTime']['shortUrlClicks'])
             embed.set_thumbnail(url="https://www.ostraining.com/cdn/images/coding/google-url-shortener-tool.jpg")
             await ctx.send(embed=embed)
-        elif "status" not in data:
-            await ctx.send("This URL doesn't exist.")
-        else:
-            await ctx.send("This URL has been removed.")
+        except:
+            if "status" not in data:
+                await ctx.send("This URL doesn't exist.")
+            else:
+                await ctx.send("This URL has been removed.")
