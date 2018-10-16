@@ -52,7 +52,7 @@ class Googl(BaseCog):
             data = await resp.json()
         if data["status"] == "OK":
             await ctx.send(data['longUrl'])
-        elif not data["status"]:
+        elif "status" not in data:
             await ctx.send("This URL doesn't exist.")
         else:
             await ctx.send("This URL has been removed.")
@@ -75,7 +75,7 @@ class Googl(BaseCog):
             embed.add_field(name="**Clicks:**",value=data['analytics']['allTime']['shortUrlClicks'])
             embed.set_thumbnail(url="https://www.ostraining.com/cdn/images/coding/google-url-shortener-tool.jpg")
             await ctx.send(embed=embed)
-        elif not data["status"]:
+        elif "status" not in data:
             await ctx.send("This URL doesn't exist.")
         else:
             await ctx.send("This URL has been removed.")
