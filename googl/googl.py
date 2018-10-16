@@ -54,7 +54,7 @@ class Googl(BaseCog):
             await ctx.send(data['longUrl'])
         except:
             if "error" in data:
-                if data["error"]["errors"]["code"] == "404":
+                if data["error"]["errors"]["code"] == 404:
                     await ctx.send("This URL doesn't exist.")
                 else:
                     await ctx.send("The API key is invalid.")
@@ -81,7 +81,7 @@ class Googl(BaseCog):
             await ctx.send(embed=embed)
         except:
             if "error" in data:
-                if data["error"]["errors"]["code"] == "404":
+                if data["error"]["errors"]["code"] == 404:
                     await ctx.send("This URL doesn't exist.")
                 else:
                     await ctx.send("The API key is invalid.")
