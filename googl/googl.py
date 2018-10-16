@@ -30,6 +30,9 @@ class Googl(BaseCog):
     async def shorten(self, ctx, url):
         """Shorten url"""
         key = await self.config.api_key()
+        if key is False:
+            await ctx.send("No API key is set, contact the bot owner.")
+            return
         shorten = 'https://www.googleapis.com/urlshortener/v1/url?key=' + key
         payload = {"longUrl": url}
         headers = {"content-type": "application/json"}
@@ -41,6 +44,9 @@ class Googl(BaseCog):
     async def expand(self, ctx, url):
         """Expand goo.gl url"""
         key = await self.config.api_key()
+        if key is False:
+            await ctx.send("No API key is set, contact the bot owner.")
+            return
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url) as resp:
             print(resp.status)
             data = await resp.json()
@@ -50,6 +56,9 @@ class Googl(BaseCog):
     async def analytics(self, ctx, url):
         """Analytics for url"""
         key = await self.config.api_key()
+        if key is False:
+            await ctx.send("No API key is set, contact the bot owner.")
+            return
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url + '&projection=FULL') as resp:
             print(resp.status)
             data = await resp.json()
