@@ -22,7 +22,7 @@ class Googl(BaseCog):
     @commands.is_owner()
     async def setkey(self, ctx, key):
         """Set the Google api key"""
-        await self.config.api_key().set(key)
+        await self.config.api_key.set(key)
         await ctx.send("Key updated!")
         await ctx.message.delete()
 
