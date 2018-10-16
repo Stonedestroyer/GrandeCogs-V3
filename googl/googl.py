@@ -65,6 +65,7 @@ class Googl(BaseCog):
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url + '&projection=FULL') as resp:
             print(resp.status)
             data = await resp.json()
+            await ctx.send(data["status"])
             if data["status"] is not "OK":
                 await ctx.send("This URL has either been removed or doesn't exist.")
                 return
