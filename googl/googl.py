@@ -53,7 +53,9 @@ class Googl(BaseCog):
         try:
             await ctx.send(data['longUrl'])
         except:
-            if "status" not in data:
+            if "error" in data:
+                await ctx.send("The API key is invalid.")
+            elif "status" not in data:
                 await ctx.send("This URL doesn't exist.")
             else:
                 await ctx.send("This URL has been removed.")
@@ -77,7 +79,9 @@ class Googl(BaseCog):
             embed.set_thumbnail(url="https://www.ostraining.com/cdn/images/coding/google-url-shortener-tool.jpg")
             await ctx.send(embed=embed)
         except:
-            if "status" not in data:
+            if "error" in data:
+                await ctx.send("The API key is invalid.")
+            elif "status" not in data:
                 await ctx.send("This URL doesn't exist.")
             else:
                 await ctx.send("This URL has been removed.")
