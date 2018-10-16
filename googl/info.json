@@ -1,0 +1,10 @@
+{
+    "author" : ["Grande#0001"],
+    "bot_version" : [3,0,0],
+    "description" : "Googl url shortening, expander and analytics",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!",
+    "short" : "Googl url shortening, expander and analytics",
+    "requirements": [],
+    "tags" : ["googl", "google", "url", "urlshortener", "shortener"]
+}
