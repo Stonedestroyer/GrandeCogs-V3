@@ -65,7 +65,6 @@ class Googl(BaseCog):
         async with self.session.get('https://www.googleapis.com/urlshortener/v1/url?key=' + key + '&shortUrl=' + url + '&projection=FULL') as resp:
             print(resp.status)
             data = await resp.json()
-        await ctx.send(data["status"])
         if data["status"] == "OK":
             embed = discord.Embed(colour=discord.Colour.blue())
             embed.add_field(name="**Shortened Url:**",value=data['id'])
