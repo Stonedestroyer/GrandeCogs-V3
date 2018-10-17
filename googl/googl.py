@@ -38,7 +38,10 @@ class Googl(BaseCog):
         headers = {"content-type": "application/json"}
         async with self.session.post(shorten,data=json.dumps(payload),headers=headers) as resp:
             data = await resp.json()
-        await ctx.send(data['id'])
+        try:
+            await ctx.send(data['id'])
+        except:
+            await ctx.send("The API key is invalid.")
 
     @googl.command()
     async def expand(self, ctx, url):
