@@ -28,7 +28,7 @@ class CodeStats(BaseCog):
         for key, value in top_langs.items():
             langs += f"**{key}:** Level {self._getlevel(value['xps'])} ({value['xps']} xp)\n"
         
-        embed = discord.Embed(description=f"[{user}](https://codestats.net/users/{user})", colour=discord.Colour.blue())
+        embed = discord.Embed(description=f"[{user}](https://codestats.net/users/{user})", colour=(await ctx.embed_colour()))
         embed.add_field(name="Overall", value=f"**Level:** {level}\n**Total XP:** {total_xp}\n**Recent XP:** {recent_xp}")
         embed.add_field(name="Top 5 Languages", value=f"{langs}")
         embed.set_thumbnail(url="https://codestats.net/images/Logo_crushed.png")

@@ -14,7 +14,7 @@ class ScanPort(BaseCog):
         """Scan an IP for open ports"""
         resp = self._scanport(ip, port)
         if resp == True:
-            data = discord.Embed(description="Port Scan", colour=discord.Colour.blue())
+            data = discord.Embed(description="Port Scan", colour=(await ctx.embed_colour()))
             data.add_field(name="**Success**", value=f"IP: {ip}\nPort: {port}")
             await ctx.send(embed=data)
         else:

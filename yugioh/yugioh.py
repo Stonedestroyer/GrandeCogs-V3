@@ -39,7 +39,7 @@ class YuGiOh(BaseCog):
             em.set_footer(text="YGOHub.com")
             return em
         name = data["card"]["name"]
-        em = discord.Embed(title=name, color=0x00ff00)
+        em = discord.Embed(title=name, colour=(await ctx.embed_colour()))
         
         image = data["card"]["image_path"]
         em.set_image(url=image)
@@ -83,7 +83,7 @@ class YuGiOh(BaseCog):
         if data["status"] == "fail":
             await ctx.send(data["message"])
             return
-        em = discord.Embed(title=card, description="Card Prices", color=0x00ff00)
+        em = discord.Embed(title=card, description="Card Prices", colour=(await ctx.embed_colour()))
         for i in data["data"]:
             try:
                 price_usd = i['price_data']['data']['prices']['average']

@@ -75,7 +75,7 @@ class Googl(BaseCog):
             print(resp.status)
             data = await resp.json()
         try:
-            embed = discord.Embed(colour=discord.Colour.blue())
+            embed = discord.Embed(colour=(await ctx.embed_colour()))
             embed.add_field(name="**Shortened Url:**",value=data['id'])
             embed.add_field(name="**Long Url:**",value=data['longUrl'])
             embed.add_field(name="**Date Created:**",value=data['created'])
