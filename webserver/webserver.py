@@ -47,9 +47,14 @@ class WebServer(BaseCog):
     async def make_webserver(self):
 
         async def page(request):
-            filepath = bundled_data_path(self) / 'index.html'
-            with open(filepath) as f:
-                body = f.read()
+            try:
+                filepath = bundled_data_path(self) / 'index.html'
+                with open(filepath) as f:
+                    body = f.read()
+            except:
+                filepath = bundled_data_path(self) / 'default.html'
+                with open(filepath) as f:
+                    body = f.read()
             return web.Response(text=body, content_type='text/html')
 
         try:
@@ -63,6 +68,7 @@ class WebServer(BaseCog):
             pass
 
     def __unload(self):
+        print(self.server)
         self.server.close()
         self.bot.loop.run_until_complete(self.server.wait_closed())
         self.bot.loop.run_until_complete(self.app.shutdown())
