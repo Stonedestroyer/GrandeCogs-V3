@@ -52,11 +52,14 @@ class WebServer(BaseCog):
                 body = f.read()
             return web.Response(text=body, content_type='text/html')
 
-        self.app.router.add_get('/', page)
-        self.handler = self.app.make_handler()
-        port = await self.config.port()
-        self.server = await self.bot.loop.create_server(self.handler, '0.0.0.0', port)
-        print(f"Serving webserver on port {port}")
+        try:
+            self.app.router.add_get('/', page)
+            self.handler = self.app.make_handler()
+            port = await self.config.port()
+            self.server = await self.bot.loop.create_server(self.handler, '0.0.0.0', port)
+            print(f"Serving webserver on port {port}")
+        except:
+            pass
 
     def __unload(self):
         self.server.close()
