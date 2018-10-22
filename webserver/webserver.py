@@ -1,5 +1,6 @@
 import discord
 from redbot.core import checks, commands
+from redbot.core import Config
 from redbot.core.data_manager import bundled_data_path
 from aiohttp import web
 
