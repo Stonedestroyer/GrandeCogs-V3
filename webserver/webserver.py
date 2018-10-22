@@ -34,7 +34,7 @@ class WebServer(BaseCog):
             await ctx.send("Invalid file, please upload a file called `index.html`.")
             return
         filepath = bundled_data_path(self) / 'index.html'
-        await file.save(filepath)
+        await file.save(f"{filepath}")
         await ctx.send("New index set!")
 
     @webserver.command()
