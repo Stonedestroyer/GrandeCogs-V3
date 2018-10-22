@@ -26,7 +26,7 @@ class WebServer(BaseCog):
     async def upload(self, ctx):
         """Upload website index.html"""
         attachments = ctx.message.attachments
-        if len(attachment) > 1:
+        if len(attachments) > 1:
             await ctx.send("More than one file uploaded, please upload a single file called `index.html`.")
             return
         file = attachments[0]
