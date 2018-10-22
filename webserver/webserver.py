@@ -2,7 +2,6 @@ import discord
 from redbot.core import checks, commands
 from redbot.core.data_manager import bundled_data_path
 from aiohttp import web
-import ipgetter
 
 BaseCog = getattr(commands, "Cog", object)
 
@@ -13,7 +12,6 @@ class WebServer(BaseCog):
         self.server = None
         self.app = web.Application()
         self.handler = None
-        self.ip = ipgetter.myip()
         self.config = Config.get_conf(self, identifier=3723456754567, force_registration=True)
         self.config.register_global(port=8000)
 
@@ -58,7 +56,7 @@ class WebServer(BaseCog):
         self.handler = self.app.make_handler()
         port = await self.config.port()
         self.server = await self.bot.loop.create_server(self.handler, '0.0.0.0', port)
-        print('Serving webserver on {}:{}'.format(self.ip, port))
+        print(f"Serving webserver on port {port}")
 
     def __unload(self):
         self.server.close()
