@@ -42,12 +42,11 @@ class WebServer(BaseCog):
     async def port(self, ctx, port:int):
         """Change webServer port."""
         await self.config.port.set(port)
-        await self.bot.say("Port updated!")
+        await ctx.send("Port updated!")
 
     async def make_webserver(self):
 
         async def page(request):
-            body = self.settings['content']
             filepath = bundled_data_path(self) / 'index.html'
             with open(filepath) as f:
                 body = f.read()
