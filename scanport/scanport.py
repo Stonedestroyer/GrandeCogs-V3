@@ -1,5 +1,5 @@
 import discord
-from redbot.core import commands
+from redbot.core import checks, commands
 import socket
 
 BaseCog = getattr(commands, "Cog", object)
@@ -9,7 +9,7 @@ class ScanPort(BaseCog):
         self.bot = bot
 
     @commands.command()
-    @commands.is_owner()
+    @checks.is_owner()
     async def scanport(self, ctx, ip, port:int):
         """Scan an IP for open ports"""
         resp = self._scanport(ip, port)

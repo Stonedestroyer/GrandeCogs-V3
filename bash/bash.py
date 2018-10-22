@@ -1,5 +1,5 @@
 import discord
-from redbot.core import commands
+from redbot.core import checks, commands
 import subprocess
 import asyncio
 from subprocess import Popen
@@ -14,7 +14,7 @@ class Bash(BaseCog):
         self.bot = bot
     
     @commands.command(aliases=["shell"])
-    @commands.is_owner()
+    @checks.is_owner()
     async def bash(self, ctx, *, arg):
         """Bash shell"""
         proc = await asyncio.create_subprocess_shell(arg, stdin=None, stderr=None, stdout=PIPE)

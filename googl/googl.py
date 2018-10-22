@@ -1,5 +1,5 @@
 import discord
-from redbot.core import commands
+from redbot.core import checks, commands
 import aiohttp
 import json
 from redbot.core import Config
@@ -19,7 +19,7 @@ class Googl(BaseCog):
         pass
 
     @googl.command()
-    @commands.is_owner()
+    @checks.is_owner()
     async def setkey(self, ctx, key):
         """Set the Google api key"""
         await self.config.api_key.set(key)
