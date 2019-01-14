@@ -17,7 +17,7 @@ class Bash(BaseCog):
     @checks.is_owner()
     async def bash(self, ctx, *, arg):
         """Bash shell"""
-        proc = await asyncio.create_subprocess_shell(arg, stdin=None, stderr=None, stdout=PIPE)
+        proc = await asyncio.create_subprocess_shell(arg, stdin=None, stderr=PIPE, stdout=PIPE)
         out = await proc.stdout.read()
         msg = pagify(out.decode('utf-8'))
         await ctx.send(f"```ini\n\n[Bash Input]: {arg}\n```")
