@@ -24,7 +24,10 @@ class Googl(BaseCog):
         """Set the Google api key"""
         await self.config.api_key.set(key)
         await ctx.send("Key updated!")
-        await ctx.message.delete()
+        try:
+            await ctx.message.delete()
+        except:
+            await ctx.send("The bot does not have permission to delete your message, please delete it if this isn't in a private channel.")
 
     @googl.command()
     async def shorten(self, ctx, url):
