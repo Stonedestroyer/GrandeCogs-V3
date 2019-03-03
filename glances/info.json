@@ -1,0 +1,10 @@
+{
+    "author" : ["Grande#0001"],
+    "bot_version" : [3,0,0],
+    "description" : "Glances system monitoring",
+    "hidden" : false,
+    "install_msg" : "Thank you for adding this cog!\n\n\n**Install:**\n\n1. Install Glances through https://nicolargo.github.io/glances/\n2. `apt install phantomjs npm nodejs` then `npm install -g phantomjs`, or http://phantomjs.org/download.html\n3. Run `glances -w` inside a screen / tmux session.",
+    "short" : "Glances monitoring",
+    "requirements": ["selenium"],
+    "tags" : ["glances", "monitor"]
+}
