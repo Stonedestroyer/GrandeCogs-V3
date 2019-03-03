@@ -2,6 +2,7 @@ import discord
 from redbot.core import checks, commands
 from selenium import webdriver
 import asyncio
+import os
 
 BaseCog = getattr(commands, "Cog", object)
 
@@ -13,7 +14,7 @@ class Glances(BaseCog):
     @checks.is_owner()
     async def glances(self, ctx):
         """Glances monitor"""
-        driver = webdriver.PhantomJS()
+        driver = webdriver.PhantomJS(service_log_path=os.path.devnull)
         driver.set_window_size(1920, 1080)
         driver.get("http://0.0.0.0:61208/")
         await asyncio.sleep(1)
