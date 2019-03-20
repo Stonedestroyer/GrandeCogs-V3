@@ -21,5 +21,4 @@ class Bash(BaseCog):
         out = await proc.stdout.read()
         msg = pagify(out.decode('utf-8'))
         await ctx.send(f"```ini\n\n[Bash Input]: {arg}\n```")
-        for page in msg:
-            await ctx.send("```py\n\n{}```".format(page))
+        await ctx.send_interactive(msg, box_lang="py")
