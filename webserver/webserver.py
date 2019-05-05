@@ -3,7 +3,7 @@ from redbot.core import checks, commands
 from redbot.core import Config
 from redbot.core.data_manager import bundled_data_path
 from aiohttp import web
-import asyncio
+import asyncio, io
 
 BaseCog = getattr(commands, "Cog", object)
 
@@ -67,16 +67,25 @@ class WebServer(BaseCog):
         async def index(request):
             try:
                 filename = request.match_info["file"]
-                filepath = bundled_data_path(self) / request.match_info["file"]
-                with open(filepath) as f:
-                    body = f.read()
                 if filename.endswith(".html"):
+                    filepath = bundled_data_path(self) / request.match_info["file"]
+                    with open(filepath) as f:
+                        body = f.read()
                     return web.Response(text=body, content_type="text/html")
                 elif filename.endswith(".gif"):
+                    filepath = bundled_data_path(self) / request.match_info["file"]
+                    with open(filepath) as f:
+                        body = io.BytesIO(f.read())
                     return web.Response(text=body, content_type="image/gif")
                 elif filename.endswith(".png"):
+                    filepath = bundled_data_path(self) / request.match_info["file"]
+                    with open(filepath) as f:
+                        body = io.BytesIO(f.read())
                     return web.Response(text=body, content_type="image/png")
                 elif filename.endswith(".jpeg") or filename.endswith(".jpg"):
+                    filepath = bundled_data_path(self) / request.match_info["file"]
+                    with open(filepath) as f:
+                        body = io.BytesIO(f.read())
                     return web.Response(text=body, content_type="image/jpeg")
                 else:
                     try:
