@@ -74,7 +74,7 @@ class WebServer(BaseCog):
                     return web.Response(text=body, content_type="text/html")
                 elif filename.endswith(".gif") or filename.endswith(".png") or filename.endswith(".jpeg") or filename.endswith(".jpg"):
                     filepath = bundled_data_path(self) / request.match_info["file"]
-                    return web.FileResponse(text=filepath)
+                    return web.FileResponse(filepath)
                 else:
                     try:
                         filepath = bundled_data_path(self) / "index.html"
