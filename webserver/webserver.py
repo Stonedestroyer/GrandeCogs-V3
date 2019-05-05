@@ -30,7 +30,7 @@ class WebServer(BaseCog):
     @webserver.command()
     @checks.is_owner()
     async def upload(self, ctx):
-        """Upload website index.html"""
+        """Upload website files"""
         attachments = ctx.message.attachments
         if len(attachments) = 0:
             await ctx.send("No file uploaded, please upload something.")
