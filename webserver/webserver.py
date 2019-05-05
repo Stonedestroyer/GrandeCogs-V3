@@ -54,17 +54,34 @@ class WebServer(BaseCog):
         global runner
         routes = web.RouteTableDef()
 
-        @routes.get('/')
+        @routes.get("/")
         async def index(request):
             try:
-                filepath = bundled_data_path(self) / 'index.html'
+                filepath = bundled_data_path(self) / "index.html"
                 with open(filepath) as f:
                     body = f.read()
             except:
-                filepath = bundled_data_path(self) / 'default.html'
+                filepath = bundled_data_path(self) / "default.html"
                 with open(filepath) as f:
                     body = f.read()
-            return web.Response(text=body, content_type='text/html')
+            return web.Response(text=body, content_type="text/html")
+
+        @routes.get("/*")
+        async def index(request):
+            try:
+                filepath = bundled_data_path(self) / request.path
+                with open(filepath) as f:
+                    body = f.read()
+            except:
+                try:
+                    filepath = bundled_data_path(self) / "index.html"
+                    with open(filepath) as f:
+                        body = f.read()
+                except:
+                    filepath = bundled_data_path(self) / "default.html"
+                    with open(filepath) as f:
+                        body = f.read()
+            return web.Response(text=body, content_type="text/html")
 
         await asyncio.sleep(10)
         app = web.Application()
@@ -74,4 +91,4 @@ class WebServer(BaseCog):
         port = await self.config.port()
         site = web.TCPSite(runner, self.host, port)
         await site.start()
-        print(f'[WEBSERVER] Serving on http://{self.host}:{port}')
+        print(f"[WEBSERVER] Serving on http://{self.host}:{port}")
