@@ -68,6 +68,7 @@ class WebServer(BaseCog):
 
         @routes.get("/*")
         async def index(request):
+            print(request.path())
             try:
                 filepath = bundled_data_path(self) / request.path()
                 with open(filepath) as f:
