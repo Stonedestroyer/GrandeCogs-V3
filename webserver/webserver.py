@@ -77,11 +77,35 @@ class WebServer(BaseCog):
                     if os.path.isfile(filepath):
                         return web.FileResponse(filepath)
                     else:
-                        return self._default_page()
+                        try:
+                            filepath = bundled_data_path(self) / "index.html"
+                            with open(filepath) as f:
+                                body = f.read()
+                        except:
+                            filepath = bundled_data_path(self) / "default.html"
+                            with open(filepath) as f:
+                                body = f.read()
+                        return web.Response(text=body, content_type="text/html")
                 else:
-                    return self._default_page()
+                    try:
+                        filepath = bundled_data_path(self) / "index.html"
+                        with open(filepath) as f:
+                            body = f.read()
+                    except:
+                        filepath = bundled_data_path(self) / "default.html"
+                        with open(filepath) as f:
+                            body = f.read()
+                    return web.Response(text=body, content_type="text/html")
             except:
-                return self._default_page()
+                try:
+                    filepath = bundled_data_path(self) / "index.html"
+                    with open(filepath) as f:
+                        body = f.read()
+                except:
+                    filepath = bundled_data_path(self) / "default.html"
+                    with open(filepath) as f:
+                        body = f.read()
+                return web.Response(text=body, content_type="text/html")
 
         await asyncio.sleep(10)
         app = web.Application()
@@ -92,14 +116,3 @@ class WebServer(BaseCog):
         site = web.TCPSite(runner, self.host, port)
         await site.start()
         print(f"[WEBSERVER] Serving on http://{self.host}:{port}")
-
-    async def _default_page(self):
-        try:
-            filepath = bundled_data_path(self) / "index.html"
-            with open(filepath) as f:
-                body = f.read()
-        except:
-            filepath = bundled_data_path(self) / "default.html"
-            with open(filepath) as f:
-                body = f.read()
-        return web.Response(text=body, content_type="text/html")
