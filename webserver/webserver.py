@@ -37,7 +37,7 @@ class WebServer(BaseCog):
             return
         for attachment in attachments:
             filepath = bundled_data_path(self) / attachment.filename
-            await file.save(f"{filepath}")
+            await attachment.save(f"{filepath}")
         await ctx.send("New files uploaded!")
 
     @webserver.command()
