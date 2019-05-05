@@ -66,9 +66,28 @@ class WebServer(BaseCog):
         @routes.get("/{file}")
         async def index(request):
             try:
+                filename = request.match_info["file"]
                 filepath = bundled_data_path(self) / request.match_info["file"]
                 with open(filepath) as f:
                     body = f.read()
+                if filename.endswith(".html"):
+                    return web.Response(text=body, content_type="text/html")
+                elif filename.endswith(".gif"):
+                    return web.Response(text=body, content_type="image/gif")
+                elif filename.endswith(".png"):
+                    return web.Response(text=body, content_type="image/png")
+                elif filename.endswith(".jpeg") or filename.endswith(".jpg"):
+                    return web.Response(text=body, content_type="image/jpeg")
+                else:
+                    try:
+                        filepath = bundled_data_path(self) / "index.html"
+                        with open(filepath) as f:
+                            body = f.read()
+                    except:
+                        filepath = bundled_data_path(self) / "default.html"
+                        with open(filepath) as f:
+                            body = f.read()
+                    return web.Response(text=body, content_type="text/html")
             except:
                 try:
                     filepath = bundled_data_path(self) / "index.html"
@@ -78,7 +97,7 @@ class WebServer(BaseCog):
                     filepath = bundled_data_path(self) / "default.html"
                     with open(filepath) as f:
                         body = f.read()
-            return web.Response(text=body, content_type="text/html")
+                return web.Response(text=body, content_type="text/html")
 
         await asyncio.sleep(10)
         app = web.Application()
