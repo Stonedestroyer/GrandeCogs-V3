@@ -3,7 +3,7 @@ from redbot.core import checks, commands
 from redbot.core import Config
 from redbot.core.data_manager import bundled_data_path
 from aiohttp import web
-import asyncio, io
+import asyncio, os
 
 BaseCog = getattr(commands, "Cog", object)
 
@@ -16,7 +16,7 @@ class WebServer(BaseCog):
         self.handler = None
         self.config = Config.get_conf(self, identifier=3723456754567, force_registration=True)
         self.config.register_global(port=8000)
-        self.web = self.bot.loop.create_task(self.make_webserver())
+        self.web = self.bot.loop.create_task(self._make_webserver())
 
     def __unload(self):
         self.web.cancel()
@@ -47,7 +47,7 @@ class WebServer(BaseCog):
         await self.config.port.set(port)
         await ctx.send("Port updated!\nRestart to use the new port.")
 
-    async def make_webserver(self):
+    async def _make_webserver(self):
         global runner
         routes = web.RouteTableDef()
 
@@ -74,38 +74,14 @@ class WebServer(BaseCog):
                     return web.Response(text=body, content_type="text/html")
                 elif filename.endswith(".gif") or filename.endswith(".png") or filename.endswith(".jpeg") or filename.endswith(".jpg"):
                     filepath = bundled_data_path(self) / request.match_info["file"]
-                    try:
+                    if os.path.isfile(filepath):
                         return web.FileResponse(filepath)
-                    except:
-                        try:
-                            filepath = bundled_data_path(self) / "index.html"
-                            with open(filepath) as f:
-                                body = f.read()
-                        except:
-                            filepath = bundled_data_path(self) / "default.html"
-                            with open(filepath) as f:
-                                body = f.read()
-                        return web.Response(text=body, content_type="text/html")
+                    else:
+                        return self._default_page()
                 else:
-                    try:
-                        filepath = bundled_data_path(self) / "index.html"
-                        with open(filepath) as f:
-                            body = f.read()
-                    except:
-                        filepath = bundled_data_path(self) / "default.html"
-                        with open(filepath) as f:
-                            body = f.read()
-                    return web.Response(text=body, content_type="text/html")
+                    return self._default_page()
             except:
-                try:
-                    filepath = bundled_data_path(self) / "index.html"
-                    with open(filepath) as f:
-                        body = f.read()
-                except:
-                    filepath = bundled_data_path(self) / "default.html"
-                    with open(filepath) as f:
-                        body = f.read()
-                return web.Response(text=body, content_type="text/html")
+                return self._default_page()
 
         await asyncio.sleep(10)
         app = web.Application()
@@ -116,3 +92,14 @@ class WebServer(BaseCog):
         site = web.TCPSite(runner, self.host, port)
         await site.start()
         print(f"[WEBSERVER] Serving on http://{self.host}:{port}")
+
+    async def _default_page(self):
+        try:
+            filepath = bundled_data_path(self) / "index.html"
+            with open(filepath) as f:
+                body = f.read()
+        except:
+            filepath = bundled_data_path(self) / "default.html"
+            with open(filepath) as f:
+                body = f.read()
+        return web.Response(text=body, content_type="text/html")
