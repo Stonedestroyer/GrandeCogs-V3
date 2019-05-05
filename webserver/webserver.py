@@ -32,7 +32,7 @@ class WebServer(BaseCog):
     async def upload(self, ctx):
         """Upload website files"""
         attachments = ctx.message.attachments
-        if len(attachments) = 0:
+        if len(attachments) == 0:
             await ctx.send("No file uploaded, please upload something.")
             return
         for attachment in attachments:
