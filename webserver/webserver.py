@@ -72,7 +72,7 @@ class WebServer(BaseCog):
                     body = f.read()
             return web.Response(text=body, content_type="text/html")
 
-        @routes.get("/{file}")
+        @routes.get("/{file:*}")
         async def index(request):
             try:
                 filename = request.match_info["file"]
