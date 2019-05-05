@@ -74,21 +74,21 @@ class WebServer(BaseCog):
                     return web.Response(text=body, content_type="text/html")
                 elif filename.endswith(".gif"):
                     filepath = bundled_data_path(self) / request.match_info["file"]
-                    with open(filepath) as f:
+                    with open(filepath, "rb") as f:
                         body = f.read()
                         body = bytearray(body)
                         body = body[0]
                     return web.Response(text=body, content_type="image/gif")
                 elif filename.endswith(".png"):
                     filepath = bundled_data_path(self) / request.match_info["file"]
-                    with open(filepath) as f:
+                    with open(filepath, "rb") as f:
                         body = f.read()
                         body = bytearray(body)
                         body = body[0]
                     return web.Response(text=body, content_type="image/png")
                 elif filename.endswith(".jpeg") or filename.endswith(".jpg"):
                     filepath = bundled_data_path(self) / request.match_info["file"]
-                    with open(filepath) as f:
+                    with open(filepath, "rb") as f:
                         body = f.read()
                         body = bytearray(body)
                         body = body[0]
