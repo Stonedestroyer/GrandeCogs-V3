@@ -76,7 +76,6 @@ class WebServer(BaseCog):
         async def index(request):
             try:
                 filename = request.match_info["file"]
-                filename = Path(filename)
                 if filename.endswith(".html"):
                     filepath = bundled_data_path(self) / filename
                     with open(filepath) as f:
