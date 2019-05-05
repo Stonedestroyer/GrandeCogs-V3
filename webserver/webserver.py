@@ -29,15 +29,23 @@ class WebServer(BaseCog):
 
     @webserver.command()
     @checks.is_owner()
-    async def upload(self, ctx):
+    async def upload(self, ctx, folder=None):
         """Upload website files"""
         attachments = ctx.message.attachments
         if len(attachments) == 0:
             await ctx.send("No file uploaded, please upload something.")
             return
-        for attachment in attachments:
-            filepath = bundled_data_path(self) / attachment.filename
-            await attachment.save(f"{filepath}")
+        if folder is None:
+            for attachment in attachments:
+                filepath = bundled_data_path(self) / attachment.filename
+                await attachment.save(f"{filepath}")
+        else:
+            folder = bundled_data_path(self) / folder
+            if not os.path.isdir(folder):
+                os.makedirs(folder, exist_ok=True)
+            for attachment in attachments:
+                filepath = folder / attachment.filename
+                await attachment.save(f"{filepath}")
         await ctx.send("New files uploaded!")
 
     @webserver.command()
@@ -68,12 +76,12 @@ class WebServer(BaseCog):
             try:
                 filename = request.match_info["file"]
                 if filename.endswith(".html"):
-                    filepath = bundled_data_path(self) / request.match_info["file"]
+                    filepath = bundled_data_path(self) / filename
                     with open(filepath) as f:
                         body = f.read()
                     return web.Response(text=body, content_type="text/html")
-                elif filename.endswith(".gif") or filename.endswith(".png") or filename.endswith(".jpeg") or filename.endswith(".jpg"):
-                    filepath = bundled_data_path(self) / request.match_info["file"]
+                try:
+                    filepath = bundled_data_path(self) / filename
                     if os.path.isfile(filepath):
                         return web.FileResponse(filepath)
                     else:
@@ -86,7 +94,7 @@ class WebServer(BaseCog):
                             with open(filepath) as f:
                                 body = f.read()
                         return web.Response(text=body, content_type="text/html")
-                else:
+                except:
                     try:
                         filepath = bundled_data_path(self) / "index.html"
                         with open(filepath) as f:
