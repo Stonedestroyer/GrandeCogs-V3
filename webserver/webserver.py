@@ -66,11 +66,10 @@ class WebServer(BaseCog):
                     body = f.read()
             return web.Response(text=body, content_type="text/html")
 
-        @routes.get("/*")
+        @routes.get("/{file}")
         async def index(request):
-            print(request.path())
             try:
-                filepath = bundled_data_path(self) / request.path()
+                filepath = bundled_data_path(self) / request.match_info["file"]
                 with open(filepath) as f:
                     body = f.read()
             except:
