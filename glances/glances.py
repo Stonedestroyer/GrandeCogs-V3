@@ -16,7 +16,7 @@ class Glances(BaseCog):
         """Glances monitor"""
         driver = webdriver.PhantomJS(service_log_path=os.path.devnull)
         driver.set_window_size(1920, 1080)
-        driver.get("http://0.0.0.0:61208/")
+        driver.get("http://192.168.1.2:61208/")
         await asyncio.sleep(1)
         screenshot = driver.get_screenshot_as_png()
         driver.quit()
